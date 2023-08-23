@@ -23,12 +23,12 @@ export default function (plop) {
       {
         type: "add",
         path: "src/components/{{pascalCase name}}/{{pascalCase name}}.scss",
-        templateFile: "plop-templates/Component/Component.scss.hbs",
+        templateFile: "plop-templates/Component/Component.css.hbs",
       },
       {
         type: "add",
         path: "src/components/{{pascalCase name}}/index.ts",
-        templateFile: "plop-templates/Component/index.ts.hbs",
+        templateFile: "plop-templates/Component/index.tsx.hbs",
       },
     ],
   });
