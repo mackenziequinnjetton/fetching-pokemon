@@ -17,6 +17,7 @@ const PokemonInformation = () => {
           <tr id="pokemon-move-headers">
             <th>Ability</th>
             <th>Type</th>
+            <th>Damage</th>
           </tr>
         </thead>
       </table>

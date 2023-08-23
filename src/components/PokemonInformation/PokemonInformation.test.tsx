@@ -38,3 +38,9 @@ test('renders type move header', () => {
   const typeMoveElement = screen.getByText(/Type/i);
   expect(typeMoveElement).toBeInTheDocument();
 });
+
+test('renders damage move header', () => {
+  render(<PokemonInformation />);
+  const damageMoveElement = screen.getByText(/Damage/i);
+  expect(damageMoveElement).toBeInTheDocument();
+});
