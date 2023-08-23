@@ -32,3 +32,9 @@ test('renders ability move header', () => {
   const abilityMoveElement = screen.getByText(/Ability/i);
   expect(abilityMoveElement).toBeInTheDocument();
 });
+
+test('renders type move header', () => {
+  render(<PokemonInformation />);
+  const typeMoveElement = screen.getByText(/Type/i);
+  expect(typeMoveElement).toBeInTheDocument();
+});

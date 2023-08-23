@@ -12,9 +12,14 @@ const PokemonInformation = () => {
           alt="Your searched Pokemon." 
         />
       </div>
-      <div>
-        <h2 id="pokemon-ability-header">Ability</h2>
-      </div>
+      <table id="pokemon-moves">
+        <thead>
+          <tr id="pokemon-move-headers">
+            <th>Ability</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+      </table>
     </>
   )
 };
