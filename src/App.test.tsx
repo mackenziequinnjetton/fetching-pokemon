@@ -1,8 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders expected number of elements', () => {
   render(<App />);
-  const linkElement = screen.getByText(/Gotta Catch Em All!/i);
-  expect(linkElement).toBeInTheDocument();
+  const elements1 = screen.getAllByText(/./i);
+  const elements2 = screen.getAllByPlaceholderText(/./i);
+  const allElements = [...elements1, ...elements2]
+  expect(allElements).toHaveLength(2);
 });

@@ -1,10 +1,10 @@
-
 import './App.css';
+import { PokemonSearch } from './components/PokemonSearch';
 
 function App() {
   return (
     <>
-      Gotta Catch Em All!
+      <PokemonSearch />
     </>
   );
 }
