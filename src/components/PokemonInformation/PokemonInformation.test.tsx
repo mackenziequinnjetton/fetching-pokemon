@@ -8,3 +8,9 @@ test('renders pokemon name', () => {
   const pokemonNameElement = screen.getByText(/No Pokemon Yet!/i);
   expect(pokemonNameElement).toBeInTheDocument();
 });
+
+test('renders pokemon number', () => {
+  render(<PokemonInformation />);
+  const pokemonNumberElement = screen.getByText(/\(xxx\)/i);
+  expect(pokemonNumberElement).toBeInTheDocument();
+});
