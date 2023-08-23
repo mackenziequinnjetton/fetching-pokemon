@@ -5,6 +5,10 @@ const PokemonInformation = () => {
     <>
       <p id="pokemon-name">No Pokemon Yet!</p>
       <p id="pokemon-number">(xxx)</p>
+      <img 
+        id="pokemon-image"
+        alt="Your searched Pokemon." 
+      />
     </>
   )
 };

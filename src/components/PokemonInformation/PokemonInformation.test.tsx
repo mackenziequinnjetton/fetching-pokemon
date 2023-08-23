@@ -14,3 +14,9 @@ test('renders pokemon number', () => {
   const pokemonNumberElement = screen.getByText(/\(xxx\)/i);
   expect(pokemonNumberElement).toBeInTheDocument();
 });
+
+test('renders pokemon image', () => {
+  render(<PokemonInformation />);
+  const pokemonImageElement = screen.getByAltText(/Your searched Pokemon./i);
+  expect(pokemonImageElement).toBeInTheDocument();
+});
