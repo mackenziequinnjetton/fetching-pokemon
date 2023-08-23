@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import PokemonSearch from './PokemonSearch';
 
-test('renders PokemonSearch', () => {
+test('renders PokemonSearch search bar', () => {
   render(<PokemonSearch />);
-  const linkElement = screen.getByText(/PokemonSearch/i);
-  expect(linkElement).toBeInTheDocument();
+  const pokemonSearchBarElement = screen.getByPlaceholderText(/Which Pokemon?/i);
+  expect(pokemonSearchBarElement).toBeInTheDocument();
 });
