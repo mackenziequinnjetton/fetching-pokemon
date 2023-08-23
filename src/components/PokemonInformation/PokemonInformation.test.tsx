@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import PokemonInformation from './PokemonInformation';
 
-test('renders PokemonInformation', () => {
+test('renders pokemon name', () => {
   render(<PokemonInformation />);
-  const linkElement = screen.getByText(/PokemonInformation/i);
-  expect(linkElement).toBeInTheDocument();
+  const pokemonNameElement = screen.getByText(/No Pokemon Yet!/i);
+  expect(pokemonNameElement).toBeInTheDocument();
 });
