@@ -20,3 +20,9 @@ test('renders pokemon image', () => {
   const pokemonImageElement = screen.getByAltText(/Your searched Pokemon./i);
   expect(pokemonImageElement).toBeInTheDocument();
 });
+
+test('renders placeholder text to replace image for when no pokemon has been searched for', () => {
+  render(<PokemonInformation />);
+  const pokemonImagePlaceholderElement = screen.getByText(/Please submit a Pokemon!/i);
+  expect(pokemonImagePlaceholderElement).toBeInTheDocument();
+});
