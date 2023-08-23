@@ -6,6 +6,7 @@ const PokemonSearch = () => {
       <form>
         <label htmlFor="pokemon-search-bar"></label>
         <input id="pokemon-search-bar" type="text" placeholder="Which Pokemon?" />
+        <button type="submit">Search</button>
       </form>
     </>
   )

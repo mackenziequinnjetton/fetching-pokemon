@@ -8,3 +8,9 @@ test('renders PokemonSearch search bar', () => {
   const pokemonSearchBarElement = screen.getByPlaceholderText(/Which Pokemon?/i);
   expect(pokemonSearchBarElement).toBeInTheDocument();
 });
+
+test('renders PokemonSearch search button', () => {
+  render(<PokemonSearch />);
+  const pokemonSearchButtonElement = screen.getByRole('button', { name: /Search/i });
+  expect(pokemonSearchButtonElement).toBeInTheDocument();
+});
