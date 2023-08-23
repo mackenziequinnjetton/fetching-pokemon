@@ -22,12 +22,12 @@ export default function (plop) {
       },
       {
         type: "add",
-        path: "src/components/{{pascalCase name}}/{{pascalCase name}}.scss",
+        path: "src/components/{{pascalCase name}}/{{pascalCase name}}.css",
         templateFile: "plop-templates/Component/Component.css.hbs",
       },
       {
         type: "add",
-        path: "src/components/{{pascalCase name}}/index.ts",
+        path: "src/components/{{pascalCase name}}/index.tsx",
         templateFile: "plop-templates/Component/index.tsx.hbs",
       },
     ],
