@@ -3,7 +3,7 @@ import "./PokemonInformation.css";
 const PokemonInformation = () => {
   return (
     <>
-      <p id="pokemon-name">No Pokemon Yet!</p>
+      <h1 id="pokemon-name">No Pokemon Yet!</h1>
       <p id="pokemon-number">(xxx)</p>
       <div>
         <p id="pokemon-image-placeholder">Please submit a Pokemon!</p>
@@ -12,7 +12,9 @@ const PokemonInformation = () => {
           alt="Your searched Pokemon." 
         />
       </div>
-      
+      <div>
+        <h2 id="pokemon-ability-header">Ability</h2>
+      </div>
     </>
   )
 };

@@ -26,3 +26,9 @@ test('renders placeholder text to replace image for when no pokemon has been sea
   const pokemonImagePlaceholderElement = screen.getByText(/Please submit a Pokemon!/i);
   expect(pokemonImagePlaceholderElement).toBeInTheDocument();
 });
+
+test('renders ability move header', () => {
+  render(<PokemonInformation />);
+  const abilityMoveElement = screen.getByText(/Ability/i);
+  expect(abilityMoveElement).toBeInTheDocument();
+});
