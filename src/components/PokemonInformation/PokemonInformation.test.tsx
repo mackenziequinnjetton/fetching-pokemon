@@ -1,46 +1,83 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import PokemonInformation from './PokemonInformation';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const setup = () => {
+  const queryClient = new QueryClient();
+
+  const data = {
+    pokemon: {
+      name: "Pikachu",
+      number: "025",
+      image: "https://img.pokemondb.net/artwork/pikachu.jpg",
+      attacks: {
+        special: [
+          {
+            name: "Discharge",
+            type: "Electric",
+            damage: "35"
+          },
+          {
+            name: "Thunder",
+            type: "Electric",
+            damage: "100"
+          },
+          {
+            name: "Thunderbolt",
+            type: "Electric",
+            damage: "55"
+          },
+        ]
+      }
+    }
+  }
+
+  render(
+    <QueryClientProvider client={queryClient}>
+      <PokemonInformation data={{}} />
+    </QueryClientProvider>
+  )
+}
 
 test('renders pokemon name', () => {
-  render(<PokemonInformation />);
-  const pokemonNameElement = screen.getByText(/No Pokemon Yet!/i);
+  setup();
+  const pokemonNameElement = screen.getByText(/Pikachu/i);
   expect(pokemonNameElement).toBeInTheDocument();
 });
 
 test('renders pokemon number', () => {
-  render(<PokemonInformation />);
-  const pokemonNumberElement = screen.getByText(/\(xxx\)/i);
+  setup();
+  const pokemonNumberElement = screen.getByText(/\(025\)/i);
   expect(pokemonNumberElement).toBeInTheDocument();
 });
 
 test('renders pokemon image', () => {
-  render(<PokemonInformation />);
+  setup();
   const pokemonImageElement = screen.getByAltText(/Your searched Pokemon./i);
   expect(pokemonImageElement).toBeInTheDocument();
 });
 
 test('renders placeholder text to replace image for when no pokemon has been searched for', () => {
-  render(<PokemonInformation />);
+  setup();
   const pokemonImagePlaceholderElement = screen.getByText(/Please submit a Pokemon!/i);
   expect(pokemonImagePlaceholderElement).toBeInTheDocument();
 });
 
 test('renders ability move header', () => {
-  render(<PokemonInformation />);
+  setup();
   const abilityMoveElement = screen.getByText(/Ability/i);
   expect(abilityMoveElement).toBeInTheDocument();
 });
 
 test('renders type move header', () => {
-  render(<PokemonInformation />);
+  setup();
   const typeMoveElement = screen.getByText(/Type/i);
   expect(typeMoveElement).toBeInTheDocument();
 });
 
 test('renders damage move header', () => {
-  render(<PokemonInformation />);
+  setup();
   const damageMoveElement = screen.getByText(/Damage/i);
   expect(damageMoveElement).toBeInTheDocument();
 });
