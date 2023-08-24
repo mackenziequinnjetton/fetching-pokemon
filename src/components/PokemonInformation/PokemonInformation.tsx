@@ -1,10 +1,11 @@
 import "./PokemonInformation.css";
+import { GetPokemonQuery } from '../../gql/graphql';
 
-const PokemonInformation = () => {
+const PokemonInformation = ({ data }: { data: GetPokemonQuery | void | undefined }) => {
   return (
     <>
-      <h1 id="pokemon-name">No Pokemon Yet!</h1>
-      <p id="pokemon-number">(xxx)</p>
+      <h1 id="pokemon-name">{data !== undefined ? data.pokemon?.name : "No Pokemon Yet!"}</h1>
+      <p id="pokemon-number">({data !== undefined ? data.pokemon?.number : "xxx"})</p>
       <div>
         <p id="pokemon-image-placeholder">Please submit a Pokemon!</p>
         <img 
