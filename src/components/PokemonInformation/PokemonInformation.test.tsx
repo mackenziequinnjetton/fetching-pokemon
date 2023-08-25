@@ -100,3 +100,9 @@ test('renders first data double move ability', () => {
   const abilityMoveElement = screen.getByText(/Discharge/i);
   expect(abilityMoveElement).toBeInTheDocument();
 });
+
+test('renders all data double move types', () => {
+  dataDoubleSetup();
+  const typeMoveElement = screen.getAllByText(/Electric/i);
+  expect(typeMoveElement).toHaveLength(3);
+});
