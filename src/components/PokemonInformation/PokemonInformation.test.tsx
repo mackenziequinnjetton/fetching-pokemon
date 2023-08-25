@@ -9,6 +9,41 @@ const placeholderSetup = () => {
   )
 }
 
+const dataDoubleSetup = () => {
+  const dataDouble = {
+    "pokemon": {
+      "name": "Pikachu",
+      "number": "025",
+      "types": [
+        "Electric"
+      ],
+      "attacks": {
+        "special": [
+          {
+            "name": "Discharge",
+            "type": "Electric",
+            "damage": 35
+          },
+          {
+            "name": "Thunder",
+            "type": "Electric",
+            "damage": 100
+          },
+          {
+            "name": "Thunderbolt",
+            "type": "Electric",
+            "damage": 55
+          },
+        ]
+      }
+    }
+  }
+
+  render(
+    <PokemonInformation data={dataDouble} />
+  )
+}
+
 test('renders placeholder pokemon name', () => {
   placeholderSetup();
   const pokemonNamePlaceholderElement = screen.getByText(/No Pokemon Yet!/i);
@@ -49,4 +84,10 @@ test('renders placeholder damage move header', () => {
   placeholderSetup();
   const damageMoveElement = screen.getByText(/Damage/i);
   expect(damageMoveElement).toBeInTheDocument();
+});
+
+test('renders data double pokemon name', () => {
+  dataDoubleSetup();
+  const pokemonNameElement = screen.getByText(/Pikachu/i);
+  expect(pokemonNameElement).toBeInTheDocument();
 });
