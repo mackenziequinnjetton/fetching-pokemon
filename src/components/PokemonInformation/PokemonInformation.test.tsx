@@ -1,43 +1,45 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import PokemonInformation from './PokemonInformation';
+import { Pokemon } from '../../gql/graphql';
 
 const placeholderSetup = () => {
   render(
-    <PokemonInformation data={undefined} />
+    
+    <PokemonInformation pokemon={{} as Pokemon} />
   )
 }
 
-const dataDoubleSetup = () => {
-  const dataDouble = {
-    "pokemon": {
-      "name": "Pikachu",
-      "number": "025",
-      "image": "https://img.pokemondb.net/artwork/pikachu.jpg",
-      "attacks": {
-        "special": [
-          {
-            "name": "Discharge",
-            "type": "Electric",
-            "damage": 35
-          },
-          {
-            "name": "Thunder",
-            "type": "Electric",
-            "damage": 100
-          },
-          {
-            "name": "Thunderbolt",
-            "type": "Electric",
-            "damage": 55
-          },
-        ]
-      }
+const pokemonDoubleSetup = () => {
+  const pokemonDouble = {
+    "id": "UG9rZW1vbjowMjU=",
+    "name": "Pikachu",
+    "number": "025",
+    "image": "https://img.pokemondb.net/artwork/pikachu.jpg",
+    "attacks": {
+      "special": [
+        {
+          "name": "Discharge",
+          "type": "Electric",
+          "damage": 35
+        },
+        {
+          "name": "Thunder",
+          "type": "Electric",
+          "damage": 100
+        },
+        {
+          "name": "Thunderbolt",
+          "type": "Electric",
+          "damage": 55
+        },
+      ]
     }
   }
 
+
   render(
-    <PokemonInformation data={dataDouble} />
+    <PokemonInformation pokemon={pokemonDouble} />
   )
 }
 
@@ -78,37 +80,37 @@ test('renders move damage header', () => {
 });
 
 test('renders data double pokemon name', () => {
-  dataDoubleSetup();
+  pokemonDoubleSetup();
   const pokemonNameElement = screen.getByText(/Pikachu/i);
   expect(pokemonNameElement).toBeInTheDocument();
 });
 
 test('renders data double pokemon number', () => {
-  dataDoubleSetup();
+  pokemonDoubleSetup();
   const pokemonNumberElement = screen.getByText(/\(025\)/i);
   expect(pokemonNumberElement).toBeInTheDocument();
 });
 
 test('renders data double pokemon image', () => {
-  dataDoubleSetup();
+  pokemonDoubleSetup();
   const pokemonImageElement = screen.getByAltText(/Your searched Pokemon./i);
   expect(pokemonImageElement).toHaveAttribute('src', 'https://img.pokemondb.net/artwork/pikachu.jpg');
 });
 
 test('renders all data double move abilityies', () => {
-  dataDoubleSetup();
+  pokemonDoubleSetup();
   const abilityMoveElements = screen.getAllByText(/Discharge|Thunder|Thunderbolt/i);
   expect(abilityMoveElements).toHaveLength(3);
 });
 
 test('renders all data double move types', () => {
-  dataDoubleSetup();
+  pokemonDoubleSetup();
   const typeMoveElements = screen.getAllByText(/Electric/i);
   expect(typeMoveElements).toHaveLength(3);
 });
 
 test('renders all data double move damages', () => {
-  dataDoubleSetup();
+  pokemonDoubleSetup();
   const damageMoveElements = screen.getAllByText(/35|100|55/i);
   expect(damageMoveElements).toHaveLength(3);
 });
