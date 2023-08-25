@@ -1,9 +1,5 @@
 import './App.css';
-import { graphql } from './gql/gql';
-import { PokemonInformation } from './components/PokemonInformation';
 import { PokemonSearch } from './components/PokemonSearch';
-import { useQuery } from '@tanstack/react-query';
-import { request } from 'graphql-request';
 
 // const getPokemonDocument = graphql(/* GraphQL */ `
 //   query getPokemon($name: String!) {

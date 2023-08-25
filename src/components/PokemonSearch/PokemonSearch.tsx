@@ -1,7 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import "./PokemonSearch.css";
-import request, { RequestDocument } from "graphql-request";
-import { graphql } from "../../gql/gql";
+import request from "graphql-request";
 import { useState } from "react";
 import PokemonInformation from "../PokemonInformation/PokemonInformation";
 
@@ -64,17 +63,6 @@ const PokemonSearch = () => {
       queryClient.prefetchQuery(['pokemon', searchTerm], () => fetchSearchResults(searchTerm));
     }
   };
-
-  // const { data } = useQuery({
-  //   queryKey: ['pokemon'],
-  //   queryFn: async () => {
-  //     return await request(
-  //       'https://graphql-pokemon2.vercel.app/?query=&operationName=getPokemon', 
-  //       getPokemonDocument, 
-  //       { name: 'Pikachu' }
-  //     )
-  //   }
-  // });
 
   return (
     <>
