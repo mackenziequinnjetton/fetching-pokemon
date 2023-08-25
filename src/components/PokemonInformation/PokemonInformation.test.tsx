@@ -95,14 +95,20 @@ test('renders data double pokemon image', () => {
   expect(pokemonImageElement).toHaveAttribute('src', 'https://img.pokemondb.net/artwork/pikachu.jpg');
 });
 
-test('renders first data double move ability', () => {
+test('renders all data double move abilityies', () => {
   dataDoubleSetup();
-  const abilityMoveElement = screen.getByText(/Discharge/i);
-  expect(abilityMoveElement).toBeInTheDocument();
+  const abilityMoveElements = screen.getAllByText(/Discharge|Thunder|Thunderbolt/i);
+  expect(abilityMoveElements).toHaveLength(3);
 });
 
 test('renders all data double move types', () => {
   dataDoubleSetup();
-  const typeMoveElement = screen.getAllByText(/Electric/i);
-  expect(typeMoveElement).toHaveLength(3);
+  const typeMoveElements = screen.getAllByText(/Electric/i);
+  expect(typeMoveElements).toHaveLength(3);
+});
+
+test('renders all data double move damages', () => {
+  dataDoubleSetup();
+  const damageMoveElements = screen.getAllByText(/35|100|55/i);
+  expect(damageMoveElements).toHaveLength(3);
 });
