@@ -1,7 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import PokemonInformation from './PokemonInformation';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const placeholderSetup = () => {
   render(
@@ -90,4 +89,10 @@ test('renders data double pokemon name', () => {
   dataDoubleSetup();
   const pokemonNameElement = screen.getByText(/Pikachu/i);
   expect(pokemonNameElement).toBeInTheDocument();
+});
+
+test('renders data double pokemon number', () => {
+  dataDoubleSetup();
+  const pokemonNumberElement = screen.getByText(/\(025\)/i);
+  expect(pokemonNumberElement).toBeInTheDocument();
 });
