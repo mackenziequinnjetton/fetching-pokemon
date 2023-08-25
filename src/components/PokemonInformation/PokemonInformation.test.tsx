@@ -13,9 +13,7 @@ const dataDoubleSetup = () => {
     "pokemon": {
       "name": "Pikachu",
       "number": "025",
-      "types": [
-        "Electric"
-      ],
+      "image": "https://img.pokemondb.net/artwork/pikachu.jpg",
       "attacks": {
         "special": [
           {
@@ -55,12 +53,6 @@ test('renders placeholder pokemon number', () => {
   expect(pokemonNumberElement).toBeInTheDocument();
 });
 
-test('renders placeholder pokemon image', () => {
-  placeholderSetup();
-  const pokemonImageElement = screen.getByAltText(/Your searched Pokemon./i);
-  expect(pokemonImageElement).toBeInTheDocument();
-});
-
 test('renders placeholder text for when no successful pokemon search', () => {
   placeholderSetup();
   const pokemonImagePlaceholderElement = screen.getByText(/Please submit a Pokemon!/i);
@@ -95,4 +87,10 @@ test('renders data double pokemon number', () => {
   dataDoubleSetup();
   const pokemonNumberElement = screen.getByText(/\(025\)/i);
   expect(pokemonNumberElement).toBeInTheDocument();
+});
+
+test('renders data double pokemon image', () => {
+  dataDoubleSetup();
+  const pokemonImageElement = screen.getByAltText(/Your searched Pokemon./i);
+  expect(pokemonImageElement).toHaveAttribute('src', 'https://img.pokemondb.net/artwork/pikachu.jpg');
 });
