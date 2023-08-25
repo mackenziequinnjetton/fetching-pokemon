@@ -59,19 +59,19 @@ test('renders placeholder text for when no successful pokemon search', () => {
   expect(pokemonImagePlaceholderElement).toBeInTheDocument();
 });
 
-test('renders placeholder ability move header', () => {
+test('renders move ability header', () => {
   placeholderSetup();
   const abilityMoveElement = screen.getByText(/Ability/i);
   expect(abilityMoveElement).toBeInTheDocument();
 });
 
-test('renders placeholder type move header', () => {
+test('renders move type header', () => {
   placeholderSetup();
   const typeMoveElement = screen.getByText(/Type/i);
   expect(typeMoveElement).toBeInTheDocument();
 });
 
-test('renders placeholder damage move header', () => {
+test('renders move damage header', () => {
   placeholderSetup();
   const damageMoveElement = screen.getByText(/Damage/i);
   expect(damageMoveElement).toBeInTheDocument();
@@ -93,4 +93,10 @@ test('renders data double pokemon image', () => {
   dataDoubleSetup();
   const pokemonImageElement = screen.getByAltText(/Your searched Pokemon./i);
   expect(pokemonImageElement).toHaveAttribute('src', 'https://img.pokemondb.net/artwork/pikachu.jpg');
+});
+
+test('renders first data double move ability', () => {
+  dataDoubleSetup();
+  const abilityMoveElement = screen.getByText(/Discharge/i);
+  expect(abilityMoveElement).toBeInTheDocument();
 });

@@ -21,6 +21,15 @@ const PokemonInformation = ({ data }: { data: GetPokemonQuery | void | undefined
             <th>Type</th>
             <th>Damage</th>
           </tr>
+          {data?.pokemon?.attacks?.special?.map((move, index) => {
+            return (
+              <tr key={index} className="pokemon-move">
+                <td>{move?.name}</td>
+                <td>{move?.type}</td>
+                <td>{move?.damage}</td>
+              </tr>
+            )
+          })}
         </thead>
       </table>
     </>
