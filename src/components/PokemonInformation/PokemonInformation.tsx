@@ -1,17 +1,17 @@
 import "./PokemonInformation.css";
-import { GetPokemonQuery } from '../../gql/graphql';
+import { Pokemon } from '../../gql/graphql';
 
-const PokemonInformation = ({ data }: { data: GetPokemonQuery | void | undefined }) => {
+const PokemonInformation = ({ pokemon }: { pokemon: Pokemon }) => {
   return (
     <>
-      <h1 id="pokemon-name">{data ? data.pokemon?.name : "No Pokemon Yet!"}</h1>
-      <p id="pokemon-number">({data ? data.pokemon?.number : "xxx"})</p>
+      <h1 id="pokemon-name">{pokemon?.name ? pokemon.name : "No Pokemon Yet!"}</h1>
+      <p id="pokemon-number">({pokemon?.number ? pokemon.number : "xxx"})</p>
       <div>
         <p id="pokemon-image-placeholder">Please submit a Pokemon!</p>
         <img 
           id="pokemon-image"
           alt="Your searched Pokemon."
-          src={data && data.pokemon && data.pokemon?.image ? data.pokemon?.image : ""} 
+          src={pokemon?.image ? pokemon?.image : ""} 
         />
       </div>
       <table id="pokemon-moves">
@@ -21,7 +21,7 @@ const PokemonInformation = ({ data }: { data: GetPokemonQuery | void | undefined
             <th>Type</th>
             <th>Damage</th>
           </tr>
-          {data?.pokemon?.attacks?.special?.map((move, index) => {
+          {pokemon?.attacks?.special?.map((move, index) => {
             return (
               <tr key={index} className="pokemon-move">
                 <td>{move?.name}</td>
