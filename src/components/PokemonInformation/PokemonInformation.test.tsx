@@ -3,81 +3,50 @@ import '@testing-library/jest-dom';
 import PokemonInformation from './PokemonInformation';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-const setup = () => {
-  const queryClient = new QueryClient();
-
-  const data = {
-    pokemon: {
-      name: "Pikachu",
-      number: "025",
-      image: "https://img.pokemondb.net/artwork/pikachu.jpg",
-      attacks: {
-        special: [
-          {
-            name: "Discharge",
-            type: "Electric",
-            damage: "35"
-          },
-          {
-            name: "Thunder",
-            type: "Electric",
-            damage: "100"
-          },
-          {
-            name: "Thunderbolt",
-            type: "Electric",
-            damage: "55"
-          },
-        ]
-      }
-    }
-  }
-
+const placeholderSetup = () => {
   render(
-    <QueryClientProvider client={queryClient}>
-      <PokemonInformation data={{}} />
-    </QueryClientProvider>
+    <PokemonInformation data={undefined} />
   )
 }
 
-test('renders pokemon name', () => {
-  setup();
-  const pokemonNameElement = screen.getByText(/Pikachu/i);
-  expect(pokemonNameElement).toBeInTheDocument();
+test('renders placeholder pokemon name', () => {
+  placeholderSetup();
+  const pokemonNamePlaceholderElement = screen.getByText(/No Pokemon Yet!/i);
+  expect(pokemonNamePlaceholderElement).toBeInTheDocument();
 });
 
-test('renders pokemon number', () => {
-  setup();
-  const pokemonNumberElement = screen.getByText(/\(025\)/i);
+test('renders placeholder pokemon number', () => {
+  placeholderSetup();
+  const pokemonNumberElement = screen.getByText(/\(xxx\)/i);
   expect(pokemonNumberElement).toBeInTheDocument();
 });
 
-test('renders pokemon image', () => {
-  setup();
+test('renders placeholder pokemon image', () => {
+  placeholderSetup();
   const pokemonImageElement = screen.getByAltText(/Your searched Pokemon./i);
   expect(pokemonImageElement).toBeInTheDocument();
 });
 
-test('renders placeholder text to replace image for when no pokemon has been searched for', () => {
-  setup();
+test('renders placeholder text for when no successful pokemon search', () => {
+  placeholderSetup();
   const pokemonImagePlaceholderElement = screen.getByText(/Please submit a Pokemon!/i);
   expect(pokemonImagePlaceholderElement).toBeInTheDocument();
 });
 
-test('renders ability move header', () => {
-  setup();
+test('renders placeholder ability move header', () => {
+  placeholderSetup();
   const abilityMoveElement = screen.getByText(/Ability/i);
   expect(abilityMoveElement).toBeInTheDocument();
 });
 
-test('renders type move header', () => {
-  setup();
+test('renders placeholder type move header', () => {
+  placeholderSetup();
   const typeMoveElement = screen.getByText(/Type/i);
   expect(typeMoveElement).toBeInTheDocument();
 });
 
-test('renders damage move header', () => {
-  setup();
+test('renders placeholder damage move header', () => {
+  placeholderSetup();
   const damageMoveElement = screen.getByText(/Damage/i);
   expect(damageMoveElement).toBeInTheDocument();
 });
