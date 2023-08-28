@@ -2,24 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import "./PokemonSearch.css";
 import request from "graphql-request";
 import { useState } from "react";
-import PokemonInformation from "../PokemonInformation/PokemonInformation";
-
-// const getPokemonDocument = graphql(/* GraphQL */ `
-//   query getPokemon($name: String!) {
-//     pokemon(name: $name) {
-//       name
-//       number
-//       image
-//       attacks {
-//         special {
-//           name
-//           type
-//           damage
-//         }
-//       }
-//     }
-//   }
-// `)
+import { Pokemon } from "../../gql/graphql";
 
 const fetchSearchResults = async (searchTerm: string) => {
   const endpoint = 'https://graphql-pokemon2.vercel.app/?query=&operationName=getPokemon';
@@ -43,14 +26,14 @@ const fetchSearchResults = async (searchTerm: string) => {
   `;
 
   const variables = {
-    searchTerm,
+    name: searchTerm,
   };
 
   const data = await request(endpoint, query, variables);
   return data.pokemon;
 };
 
-const PokemonSearch = () => {
+const PokemonSearch = ({ handleSearchResult }: { handleSearchResult: (searchResult: Pokemon) => void }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const queryClient = useQueryClient();
 
@@ -58,7 +41,8 @@ const PokemonSearch = () => {
     enabled: false,
   });
 
-  const handleSearch = () => {
+  const handleSearch = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
     if (searchTerm.trim() !== '') {
       queryClient.prefetchQuery(['pokemon', searchTerm], () => fetchSearchResults(searchTerm));
     }
@@ -75,10 +59,10 @@ const PokemonSearch = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)} 
         />
-        <button type="submit" onClick={handleSearch}>Search</button>
+        <button type="submit" onClick={(e) => handleSearch(e)}>Search</button>
       </form>
 
-      {data && <PokemonInformation pokemon={data} />}
+      {data && handleSearchResult(data)}
     </>
   )
 };

@@ -9,7 +9,7 @@ const setup = () => {
 
   render(
     <QueryClientProvider client={queryClient}>
-      <PokemonSearch />
+      <PokemonSearch handleSearchResult={jest.fn}/>
     </QueryClientProvider>
   )
 }
