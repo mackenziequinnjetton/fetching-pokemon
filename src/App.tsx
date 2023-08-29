@@ -55,6 +55,7 @@ function App() {
 
   const updateSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
+    setSearchResult({} as Pokemon);
   };
 
   return (
