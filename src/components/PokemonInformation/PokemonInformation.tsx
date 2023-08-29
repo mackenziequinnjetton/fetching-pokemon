@@ -4,7 +4,7 @@ import { Pokemon } from '../../gql/graphql';
 const PokemonInformation = ({ pokemon }: { pokemon: Pokemon }) => {
   return (
     <>
-      <h1 id="pokemon-name">{pokemon?.name ? pokemon.name : "No Pokemon Yet!"}</h1>
+      <h1 id="pokemon-name">{pokemon?.name ? pokemon.name : pokemon === null ? "No Pokemon Found" : "No Pokemon Yet!"}</h1>
       <p id="pokemon-number">({pokemon?.number ? pokemon.number : "xxx"})</p>
       <div>
         <p id="pokemon-image-placeholder">{pokemon?.image ? "" : "Please submit a Pokemon!"}</p>
