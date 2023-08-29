@@ -1,7 +1,7 @@
 import "./PokemonInformation.css";
 import { Pokemon } from '../../gql/graphql';
 
-const PokemonInformation = ({ pokemon }: { pokemon: Pokemon }) => {
+const PokemonInformation = ({ pokemon }: { pokemon: Pokemon | null }) => {
   return (
     <>
       <h1 id="pokemon-name">{pokemon?.name ? pokemon.name : pokemon === null ? "No Pokemon Found" : "No Pokemon Yet!"}</h1>

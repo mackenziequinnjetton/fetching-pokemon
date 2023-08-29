@@ -43,6 +43,13 @@ const pokemonDoubleSetup = () => {
   )
 }
 
+const noPokemonFoundSetup = () => {
+  render(
+    <PokemonInformation pokemon={null} />
+  )
+}
+
+
 test('renders placeholder pokemon name', () => {
   placeholderSetup();
   const pokemonNamePlaceholderElement = screen.getByText(/No Pokemon Yet!/i);
@@ -113,4 +120,10 @@ test('renders all data double move damages', () => {
   pokemonDoubleSetup();
   const damageMoveElements = screen.getAllByText(/35|100|55/i);
   expect(damageMoveElements).toHaveLength(3);
+});
+
+test('renders no pokemon found name', () => {
+  noPokemonFoundSetup();
+  const pokemonNameElement = screen.getByText(/No Pokemon Found/i);
+  expect(pokemonNameElement).toBeInTheDocument();
 });
