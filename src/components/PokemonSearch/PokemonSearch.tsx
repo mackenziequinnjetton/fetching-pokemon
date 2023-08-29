@@ -43,6 +43,15 @@ const PokemonSearch = ({ handleSearchResult }: { handleSearchResult: (searchResu
 
   const handleSearch = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
+
+    handleSearchResult({
+      id: '',
+      name: "Loading...",
+      number: "xxx",
+      image: "",
+      attacks: { }
+    });
+
     if (searchTerm.trim() !== '') {
       queryClient.prefetchQuery(['pokemon', searchTerm], () => fetchSearchResults(searchTerm));
     }
