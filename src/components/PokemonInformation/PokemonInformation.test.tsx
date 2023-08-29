@@ -127,3 +127,9 @@ test('renders no pokemon found name', () => {
   const pokemonNameElement = screen.getByText(/No Pokemon Found/i);
   expect(pokemonNameElement).toBeInTheDocument();
 });
+
+test('renders no pokemon found number', () => {
+  noPokemonFoundSetup();
+  const pokemonNumberElement = screen.getByText(/\(xxx\)/i);
+  expect(pokemonNumberElement).toBeInTheDocument();
+});
