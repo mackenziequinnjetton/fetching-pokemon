@@ -139,3 +139,11 @@ test('renders no pokemon found image placeholder', () => {
   const pokemonImageElement = screen.getByText(/The Pokemon "Foo" is not in the database./i);
   expect(pokemonImageElement).toBeInTheDocument();
 });
+
+test("renders expected pokemon image placeholder text when previous search has returned error, pokemon is null, and search bar is now empty", () => {
+  render(
+    <PokemonInformation pokemon={null} searchTerm='' isError={true} />
+  )
+  const pokemonImageElement = screen.getByText(/Please submit a Pokemon!/i);
+  expect(pokemonImageElement).toBeInTheDocument();
+});
