@@ -39,7 +39,7 @@ const fetchSearchResults = async (searchTerm: string) => {
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState<Pokemon>({} as Pokemon);
-  const { refetch } = useQuery(['pokemon', searchTerm], () => {
+  const { refetch, isError } = useQuery(['pokemon', searchTerm], () => {
     const pokemon = fetchSearchResults(searchTerm)
     pokemon.then((result) => {
       setSearchResult(result);
@@ -60,7 +60,7 @@ function App() {
   return (
     <>
       <PokemonSearch getSearchTerm={getSearchTerm} updateSearchTerm={updateSearchTerm} refetch={refetch} />
-      <PokemonInformation pokemon={searchResult} />
+      <PokemonInformation pokemon={searchResult} searchTerm={searchTerm} isError={isError} />
     </>
   );
 }

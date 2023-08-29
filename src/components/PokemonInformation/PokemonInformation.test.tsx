@@ -6,7 +6,7 @@ import { Pokemon } from '../../gql/graphql';
 const placeholderSetup = () => {
   render(
     
-    <PokemonInformation pokemon={{} as Pokemon} />
+    <PokemonInformation pokemon={{} as Pokemon} searchTerm='' isError={false} />
   )
 }
 
@@ -39,13 +39,13 @@ const pokemonDoubleSetup = () => {
 
 
   render(
-    <PokemonInformation pokemon={pokemonDouble} />
+    <PokemonInformation pokemon={pokemonDouble} searchTerm='' isError={false} />
   )
 }
 
 const noPokemonFoundSetup = () => {
   render(
-    <PokemonInformation pokemon={null} />
+    <PokemonInformation pokemon={null} searchTerm='Foo' isError={true} />
   )
 }
 
@@ -132,4 +132,10 @@ test('renders no pokemon found number', () => {
   noPokemonFoundSetup();
   const pokemonNumberElement = screen.getByText(/\(xxx\)/i);
   expect(pokemonNumberElement).toBeInTheDocument();
+});
+
+test('renders no pokemon found image placeholder', () => {
+  noPokemonFoundSetup();
+  const pokemonImageElement = screen.getByText(/The Pokemon "Foo" is not in the database./i);
+  expect(pokemonImageElement).toBeInTheDocument();
 });
