@@ -140,6 +140,13 @@ test('renders no pokemon found image placeholder', () => {
   expect(pokemonImageElement).toBeInTheDocument();
 });
 
+test('renders no pokemon found image', () => {
+  noPokemonFoundSetup();
+  const pokemonImageElement = screen.getByRole('img');
+  expect(pokemonImageElement).toHaveAttribute("alt", "");
+  expect(pokemonImageElement).toHaveAttribute("src", "");
+});
+
 test("renders expected pokemon image placeholder text when previous search has returned error, pokemon is null, and search bar is now empty", () => {
   render(
     <PokemonInformation pokemon={null} searchTerm='' isError={true} />
