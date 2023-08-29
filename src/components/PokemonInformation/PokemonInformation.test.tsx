@@ -147,6 +147,14 @@ test('renders no pokemon found image', () => {
   expect(pokemonImageElement).toHaveAttribute("src", "");
 });
 
+test('clicking on try again button resets name', () => {
+  noPokemonFoundSetup();
+  const tryAgainButton = screen.getByText("Try again")
+  tryAgainButton.click();
+  const pokemonNameElement = screen.getByText(/No Pokemon Yet!/i);
+  expect(pokemonNameElement).toBeInTheDocument();
+});
+
 test("renders expected pokemon image placeholder text when previous search has returned error, pokemon is null, and search bar is now empty", () => {
   render(
     <PokemonInformation pokemon={null} searchTerm='' isError={true} />

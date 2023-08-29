@@ -2,7 +2,7 @@ import "./PokemonSearch.css";
 
 const PokemonSearch = ({ getSearchTerm, updateSearchTerm, refetch }: { 
   getSearchTerm: () => string,
-  updateSearchTerm: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  updateSearchTerm: (newSearchTerm: string) => void,
   refetch: () => void,
 }) => {
 
@@ -15,7 +15,7 @@ const PokemonSearch = ({ getSearchTerm, updateSearchTerm, refetch }: {
           type="text" 
           placeholder="Which Pokemon?" 
           value={getSearchTerm()}
-          onChange={(e) => updateSearchTerm(e)} 
+          onChange={(e) => updateSearchTerm(e.target.value)} 
         />
         <button type="submit" onClick={e => {
           e.preventDefault();

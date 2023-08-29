@@ -53,15 +53,15 @@ function App() {
     return searchTerm;
   };
 
-  const updateSearchTerm = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+  const updateSearchTerm = (newSearchTerm: string) => {
+    setSearchTerm(newSearchTerm);
     setSearchResult({} as Pokemon);
   };
 
   return (
     <>
       <PokemonSearch getSearchTerm={getSearchTerm} updateSearchTerm={updateSearchTerm} refetch={refetch} />
-      <PokemonInformation pokemon={searchResult} searchTerm={searchTerm} isError={isError} />
+      <PokemonInformation pokemon={searchResult} searchTerm={searchTerm} isError={isError} updateSearchTerm={updateSearchTerm} />
     </>
   );
 }
