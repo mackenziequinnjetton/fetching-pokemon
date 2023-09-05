@@ -10,27 +10,31 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState<Pokemon>({} as Pokemon);
   const { refetch, isError, error, isFetching } = useQuery(['pokemon'], async () => {
-    const result = await request('https://graphql-pokemon2.vercel.app/?query=&operationName=getPokemon', `
-      query getPokemon($name: String!) {
-        pokemon(name: $name) {
-          id
-          name
-          number
-          image
-          attacks {
-            special {
-              name
-              type
-              damage
+    if (searchTerm !== '') {
+      const result = await request('https://graphql-pokemon2.vercel.app/?query=&operationName=getPokemon', `
+        query getPokemon($name: String!) {
+          pokemon(name: $name) {
+            id
+            name
+            number
+            image
+            attacks {
+              special {
+                name
+                type
+                damage
+              }
             }
           }
         }
-      }
-    `, {
-      name: searchTerm,
-    });
-    setSearchResult(result.pokemon);
-    return result;
+      `, {
+        name: searchTerm,
+      });
+      
+      setSearchResult(result.pokemon);
+      return result;
+    }
+    return {};
   }, {
     enabled: false, 
   });

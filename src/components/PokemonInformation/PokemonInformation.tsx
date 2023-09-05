@@ -9,8 +9,6 @@ const PokemonInformation = ({ pokemon, searchTerm, isError, error, isFetching, u
   isFetching: boolean,
   updateSearchTerm: (newSearchTerm: string) => void,
 }) => {
-  console.log("isFetching", isFetching)
-  console.log("isError", isError)
   return (
     <>
       <h1 id="pokemon-name">{
@@ -18,7 +16,7 @@ const PokemonInformation = ({ pokemon, searchTerm, isError, error, isFetching, u
         ? pokemon.name 
         : isFetching 
         ? "Loading..." 
-        : isError || pokemon === null 
+        : (isError || pokemon === null) && searchTerm !== "" 
         ? "Error!" 
         : "No Pokemon Yet!"
       }</h1>
