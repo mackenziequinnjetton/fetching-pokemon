@@ -9,9 +9,19 @@ const PokemonInformation = ({ pokemon, searchTerm, isError, error, isFetching, u
   isFetching: boolean,
   updateSearchTerm: (newSearchTerm: string) => void,
 }) => {
+  console.log("isFetching", isFetching)
+  console.log("isError", isError)
   return (
     <>
-      <h1 id="pokemon-name">{pokemon?.name ? pokemon.name : isFetching ? "Loading..." : isError ? "Error!" : "No Pokemon Yet!"}</h1>
+      <h1 id="pokemon-name">{
+        pokemon?.name 
+        ? pokemon.name 
+        : isFetching 
+        ? "Loading..." 
+        : isError || pokemon === null 
+        ? "Error!" 
+        : "No Pokemon Yet!"
+      }</h1>
       <p id="pokemon-number">({pokemon?.number ? pokemon.number : "xxx"})</p>
       <div>
         <p id="pokemon-image-placeholder">{
@@ -21,6 +31,8 @@ const PokemonInformation = ({ pokemon, searchTerm, isError, error, isFetching, u
           ? "Loading..."
           : isError && searchTerm !== ""
           ? error?.message
+          : pokemon === null && searchTerm !== ""
+          ? "No Pokemon found!"
           : "Please submit a Pokemon!"
         }</p>
         <button id="try-again-button" onClick={() => updateSearchTerm("")}>Try again</button>

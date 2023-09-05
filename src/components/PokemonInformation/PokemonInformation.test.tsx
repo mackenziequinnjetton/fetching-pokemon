@@ -48,8 +48,8 @@ const noPokemonFoundSetup = () => {
     <PokemonInformation 
       pokemon={null} 
       searchTerm='Foo' 
-      isError={true} 
-      error={new Error("No Pokemon found error message")} 
+      isError={false} 
+      error={null} 
       isFetching={false} 
       updateSearchTerm={updateSearchTermMock} 
     />
@@ -156,7 +156,7 @@ test('renders no pokemon found number', () => {
 
 test('renders no pokemon found image placeholder', () => {
   noPokemonFoundSetup();
-  const pokemonImageElement = screen.getByText(/No Pokemon found error message/i);
+  const pokemonImageElement = screen.getByText(/No Pokemon Found!/i);
   expect(pokemonImageElement).toBeInTheDocument();
 });
 

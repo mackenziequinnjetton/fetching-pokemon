@@ -32,7 +32,7 @@ function App() {
     setSearchResult(result.pokemon);
     return result;
   }, {
-    enabled: false,
+    enabled: false, 
   });
 
   const getSearchTerm = () => {
