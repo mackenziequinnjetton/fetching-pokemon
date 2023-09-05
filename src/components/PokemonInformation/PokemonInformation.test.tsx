@@ -6,7 +6,7 @@ import { Pokemon } from '../../gql/graphql';
 const placeholderSetup = () => {
   render(
     
-    <PokemonInformation pokemon={{} as Pokemon} searchTerm='' isError={false} updateSearchTerm={jest.fn()}/>
+    <PokemonInformation pokemon={{} as Pokemon} searchTerm='' isError={false} error={null} updateSearchTerm={jest.fn()}/>
   )
 }
 
@@ -39,13 +39,13 @@ const pokemonDoubleSetup = () => {
 
 
   render(
-    <PokemonInformation pokemon={pokemonDouble} searchTerm='' isError={false} updateSearchTerm={jest.fn()} />
+    <PokemonInformation pokemon={pokemonDouble} searchTerm='' isError={false} error={null} updateSearchTerm={jest.fn()} />
   )
 }
 
 const noPokemonFoundSetup = () => {
   render(
-    <PokemonInformation pokemon={null} searchTerm='Foo' isError={true} updateSearchTerm={updateSearchTermMock} />
+    <PokemonInformation pokemon={null} searchTerm='Foo' isError={true} error={new Error("No Pokemon found error message")} updateSearchTerm={updateSearchTermMock} />
   )
 }
 
@@ -53,10 +53,9 @@ const updateSearchTermMock = () => {
   cleanup();
 
   render(
-    <PokemonInformation pokemon={{} as Pokemon} searchTerm='' isError={false} updateSearchTerm={updateSearchTermMock} />
+    <PokemonInformation pokemon={{} as Pokemon} searchTerm='' isError={false} error={null} updateSearchTerm={updateSearchTermMock} />
   )
 };
-
 
 test('renders placeholder pokemon name', () => {
   placeholderSetup();
@@ -132,7 +131,7 @@ test('renders all data double move damages', () => {
 
 test('renders no pokemon found name', () => {
   noPokemonFoundSetup();
-  const pokemonNameElement = screen.getByText(/No Pokemon Found/i);
+  const pokemonNameElement = screen.getByText(/Error!/i);
   expect(pokemonNameElement).toBeInTheDocument();
 });
 
@@ -144,7 +143,7 @@ test('renders no pokemon found number', () => {
 
 test('renders no pokemon found image placeholder', () => {
   noPokemonFoundSetup();
-  const pokemonImageElement = screen.getByText(/The Pokemon "Foo" is not in the database./i);
+  const pokemonImageElement = screen.getByText(/No Pokemon found error message/i);
   expect(pokemonImageElement).toBeInTheDocument();
 });
 
@@ -165,7 +164,7 @@ test('clicking on try again button resets name', () => {
 
 test("renders expected pokemon image placeholder text when previous search has returned error, pokemon is null, and search bar is now empty", () => {
   render(
-    <PokemonInformation pokemon={null} searchTerm='' isError={true} updateSearchTerm={jest.fn()} />
+    <PokemonInformation pokemon={null} searchTerm='' isError={true} error={new Error()} updateSearchTerm={jest.fn()} />
   )
   const pokemonImageElement = screen.getByText(/Please submit a Pokemon!/i);
   expect(pokemonImageElement).toBeInTheDocument();
