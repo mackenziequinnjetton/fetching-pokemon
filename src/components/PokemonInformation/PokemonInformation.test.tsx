@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import PokemonInformation from './PokemonInformation';
 import { Pokemon } from '../../gql/graphql';
@@ -45,9 +45,17 @@ const pokemonDoubleSetup = () => {
 
 const noPokemonFoundSetup = () => {
   render(
-    <PokemonInformation pokemon={null} searchTerm='Foo' isError={true} updateSearchTerm={jest.fn()} />
+    <PokemonInformation pokemon={null} searchTerm='Foo' isError={true} updateSearchTerm={updateSearchTermMock} />
   )
 }
+
+const updateSearchTermMock = () => {
+  cleanup();
+
+  render(
+    <PokemonInformation pokemon={{} as Pokemon} searchTerm='' isError={false} updateSearchTerm={updateSearchTermMock} />
+  )
+};
 
 
 test('renders placeholder pokemon name', () => {
@@ -149,7 +157,7 @@ test('renders no pokemon found image', () => {
 
 test('clicking on try again button resets name', () => {
   noPokemonFoundSetup();
-  const tryAgainButton = screen.getByText("Try again")
+  const tryAgainButton = screen.getByText("Try again");
   tryAgainButton.click();
   const pokemonNameElement = screen.getByText(/No Pokemon Yet!/i);
   expect(pokemonNameElement).toBeInTheDocument();
