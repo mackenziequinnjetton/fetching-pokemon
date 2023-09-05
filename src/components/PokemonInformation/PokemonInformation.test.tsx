@@ -6,7 +6,7 @@ import { Pokemon } from '../../gql/graphql';
 const placeholderSetup = () => {
   render(
     
-    <PokemonInformation pokemon={{} as Pokemon} searchTerm='' isError={false} />
+    <PokemonInformation pokemon={{} as Pokemon} searchTerm='' isError={false} updateSearchTerm={jest.fn()}/>
   )
 }
 
@@ -39,13 +39,13 @@ const pokemonDoubleSetup = () => {
 
 
   render(
-    <PokemonInformation pokemon={pokemonDouble} searchTerm='' isError={false} />
+    <PokemonInformation pokemon={pokemonDouble} searchTerm='' isError={false} updateSearchTerm={jest.fn()} />
   )
 }
 
 const noPokemonFoundSetup = () => {
   render(
-    <PokemonInformation pokemon={null} searchTerm='Foo' isError={true} />
+    <PokemonInformation pokemon={null} searchTerm='Foo' isError={true} updateSearchTerm={jest.fn()} />
   )
 }
 
@@ -157,7 +157,7 @@ test('clicking on try again button resets name', () => {
 
 test("renders expected pokemon image placeholder text when previous search has returned error, pokemon is null, and search bar is now empty", () => {
   render(
-    <PokemonInformation pokemon={null} searchTerm='' isError={true} />
+    <PokemonInformation pokemon={null} searchTerm='' isError={true} updateSearchTerm={jest.fn()} />
   )
   const pokemonImageElement = screen.getByText(/Please submit a Pokemon!/i);
   expect(pokemonImageElement).toBeInTheDocument();
