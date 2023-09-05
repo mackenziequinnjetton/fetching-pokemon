@@ -6,7 +6,7 @@ import { Pokemon } from '../../gql/graphql';
 const placeholderSetup = () => {
   render(
     
-    <PokemonInformation pokemon={{} as Pokemon} searchTerm='' isError={false} error={null} updateSearchTerm={jest.fn()}/>
+    <PokemonInformation pokemon={{} as Pokemon} searchTerm='' isError={false} error={null} isFetching={false} updateSearchTerm={jest.fn()}/>
   )
 }
 
@@ -39,13 +39,20 @@ const pokemonDoubleSetup = () => {
 
 
   render(
-    <PokemonInformation pokemon={pokemonDouble} searchTerm='' isError={false} error={null} updateSearchTerm={jest.fn()} />
+    <PokemonInformation pokemon={pokemonDouble} searchTerm='' isError={false} error={null} isFetching={false} updateSearchTerm={jest.fn()} />
   )
 }
 
 const noPokemonFoundSetup = () => {
   render(
-    <PokemonInformation pokemon={null} searchTerm='Foo' isError={true} error={new Error("No Pokemon found error message")} updateSearchTerm={updateSearchTermMock} />
+    <PokemonInformation 
+      pokemon={null} 
+      searchTerm='Foo' 
+      isError={true} 
+      error={new Error("No Pokemon found error message")} 
+      isFetching={false} 
+      updateSearchTerm={updateSearchTermMock} 
+    />
   )
 }
 
@@ -53,9 +60,15 @@ const updateSearchTermMock = () => {
   cleanup();
 
   render(
-    <PokemonInformation pokemon={{} as Pokemon} searchTerm='' isError={false} error={null} updateSearchTerm={updateSearchTermMock} />
+    <PokemonInformation pokemon={{} as Pokemon} searchTerm='' isError={false} error={null} isFetching={false} updateSearchTerm={updateSearchTermMock} />
   )
 };
+
+const loadingMessagesSetup = () => {
+  render(
+    <PokemonInformation pokemon={{} as Pokemon} searchTerm='' isError={false} error={null} isFetching={true} updateSearchTerm={jest.fn()} />
+  )
+}
 
 test('renders placeholder pokemon name', () => {
   placeholderSetup();
@@ -164,8 +177,14 @@ test('clicking on try again button resets name', () => {
 
 test("renders expected pokemon image placeholder text when previous search has returned error, pokemon is null, and search bar is now empty", () => {
   render(
-    <PokemonInformation pokemon={null} searchTerm='' isError={true} error={new Error()} updateSearchTerm={jest.fn()} />
+    <PokemonInformation pokemon={null} searchTerm='' isError={true} error={new Error()} isFetching={false} updateSearchTerm={jest.fn()} />
   )
   const pokemonImageElement = screen.getByText(/Please submit a Pokemon!/i);
   expect(pokemonImageElement).toBeInTheDocument();
+});
+
+test("renders expected pokemon name and image placeholder when query is loading", () => {
+  loadingMessagesSetup();
+  const pokemonNameElement = screen.getAllByText(/Loading.../i);
+  expect(pokemonNameElement).toHaveLength(2);
 });

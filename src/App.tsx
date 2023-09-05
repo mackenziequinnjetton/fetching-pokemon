@@ -6,45 +6,31 @@ import { Pokemon } from './gql/graphql';
 import request from 'graphql-request';
 import { useQuery } from '@tanstack/react-query';
 
-const fetchSearchResults = async (searchTerm: string) => {
-  const endpoint = 'https://graphql-pokemon2.vercel.app/?query=&operationName=getPokemon';
-
-  const query = `
-    query getPokemon($name: String!) {
-      pokemon(name: $name) {
-        id
-        name
-        number
-        image
-        attacks {
-          special {
-            name
-            type
-            damage
-          }
-        }
-      }
-    }
-  `;
-
-  const variables = {
-    name: searchTerm,
-  };
-
-  const data = await request(endpoint, query, variables);
-  
-  return data.pokemon;
-};
-
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResult, setSearchResult] = useState<Pokemon>({} as Pokemon);
-  const { refetch, isError, error } = useQuery(['pokemon', searchTerm], () => {
-    const pokemon = fetchSearchResults(searchTerm)
-    pokemon.then((result) => {
-      setSearchResult(result);
-    },
-    () => { } );
+  const { refetch, isError, error, isFetching } = useQuery(['pokemon'], async () => {
+    const result = await request('https://graphql-pokemon2.vercel.app/?query=&operationName=getPokemon', `
+      query getPokemon($name: String!) {
+        pokemon(name: $name) {
+          id
+          name
+          number
+          image
+          attacks {
+            special {
+              name
+              type
+              damage
+            }
+          }
+        }
+      }
+    `, {
+      name: searchTerm,
+    });
+    setSearchResult(result.pokemon);
+    return result;
   }, {
     enabled: false,
   });
@@ -61,7 +47,13 @@ function App() {
   return (
     <>
       <PokemonSearch getSearchTerm={getSearchTerm} updateSearchTerm={updateSearchTerm} refetch={refetch} />
-      <PokemonInformation pokemon={searchResult} searchTerm={searchTerm} isError={isError} error={error as Error} updateSearchTerm={updateSearchTerm} />
+      <PokemonInformation 
+        pokemon={searchResult} 
+        searchTerm={searchTerm} 
+        isError={isError} 
+        error={error as Error} 
+        isFetching={isFetching}
+        updateSearchTerm={updateSearchTerm} />
     </>
   );
 }

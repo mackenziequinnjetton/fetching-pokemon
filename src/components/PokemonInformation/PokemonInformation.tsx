@@ -1,25 +1,26 @@
 import "./PokemonInformation.css";
 import { Pokemon } from '../../gql/graphql';
 
-const PokemonInformation = ({ pokemon, searchTerm, isError, error, updateSearchTerm }: { 
+const PokemonInformation = ({ pokemon, searchTerm, isError, error, isFetching, updateSearchTerm }: { 
   pokemon: Pokemon | null,
   searchTerm: string,
   isError: boolean,
   error: null | Error,
+  isFetching: boolean,
   updateSearchTerm: (newSearchTerm: string) => void,
 }) => {
   return (
     <>
-      <h1 id="pokemon-name">{pokemon?.name ? pokemon.name : isError ? "Error!" : "No Pokemon Yet!"}</h1>
+      <h1 id="pokemon-name">{pokemon?.name ? pokemon.name : isFetching ? "Loading..." : isError ? "Error!" : "No Pokemon Yet!"}</h1>
       <p id="pokemon-number">({pokemon?.number ? pokemon.number : "xxx"})</p>
       <div>
         <p id="pokemon-image-placeholder">{
           pokemon?.image 
           ? "" 
+          : isFetching
+          ? "Loading..."
           : isError && searchTerm !== ""
           ? error?.message
-          // : isError && pokemon === null && searchTerm !== ""
-          // ? `The Pokemon "${searchTerm}" is not in the database.` 
           : "Please submit a Pokemon!"
         }</p>
         <button id="try-again-button" onClick={() => updateSearchTerm("")}>Try again</button>
